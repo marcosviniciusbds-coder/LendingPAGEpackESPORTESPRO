@@ -2671,5 +2671,32 @@ Use attached images as primary identity source`
 })();
 </script>
 
+<script>
+/* ===== UTMify Back-Redirect =====
+   Quando o usuário aperta VOLTAR no navegador, é redirecionado para o link abaixo,
+   levando junto os parâmetros UTM da URL atual.
+   >>> TROQUE a URL abaixo pela página que você quiser mostrar (oferta, desconto, grupo, VSL, etc.). <<<
+   No momento aponta para o checkout do Kiwify. */
+(function () {
+  var link = 'https://pay.kiwify.com.br/xvn7l1E';
+
+  function setBackRedirect(url) {
+    var urlBackRedirect = url.trim() +
+      (url.indexOf('?') > 0 ? '&' : '?') +
+      document.location.search.replace('?', '').toString();
+
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+    history.pushState({}, '', location.href);
+
+    window.addEventListener('popstate', function () {
+      setTimeout(function () { location.href = urlBackRedirect; }, 1);
+    });
+  }
+
+  setBackRedirect(link);
+})();
+</script>
+
 </body>
 </html>
